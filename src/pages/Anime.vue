@@ -3,15 +3,21 @@
     <div v-if="anime">
       <div class="date">{{ formattedDate }}</div>
       <div class="today-wrapper">
-        <div  class="today">Today</div>
+        <div class="today">Today</div>
         <div class="avatar">VS</div>
       </div>
-      <AnimeCard :anime="anime" />
+      <AnimeCard @click="openModal" :anime="anime" />
     </div>
     <div v-else>
       Loading...
     </div>
   </div>
+  <Modal :isOpen="isModalOpened" @modal-close="closeModal" name="first-modal">
+    <template #header>
+      
+    </template>
+    <template #content><AnimeCard :anime="anime" /></template>
+  </Modal>
 </template>
 
 <script>
@@ -19,23 +25,24 @@ import { ref, onMounted } from 'vue';
 import { useApiRequest } from '../utils/api'
 import AnimeCard from '../components/Animecard.vue';
 import { formattedDate } from '../utils/date';
+import Modal from "../components/ui/Modal.vue"
+
 
 export default {
   name: 'Anime',
   components: {
     AnimeCard,
+    Modal,
   },
   setup() {
     const anime = ref(null);
     const isModalOpened = ref(false);
 
-    const openModal = () => {
-      isModalOpened.value = true;
-      alert(isModalOpened.value)
-    };
-    const closeModal = () => {
-      isModalOpened.value = false;
-    };
+    const openModal = () => isModalOpened.value = true;
+    const closeModal = () => isModalOpened.value = false;
+    const submitHandler = () => {
+
+    }
 
     const { isLoading, error, sendRequest } = useApiRequest({ url: 'getContent' });
 
@@ -52,9 +59,11 @@ export default {
       anime,
       isLoading,
       error,
+      isModalOpened,
       formattedDate,
       openModal,
-      closeModal
+      closeModal,
+      submitHandler
     };
   },
 };

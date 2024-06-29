@@ -3,51 +3,21 @@
     <img class="thumbnail" :src="anime.content.thumbNailImage" />
     <div class="anime-info">
       <img class="logo" :src="anime.content.logo" loading="lazy" />
-      <div @click="openModal">
+      <div>
         <div class="title">{{ anime.content.title }}</div>
         <div class="subtite">{{ anime.content.subTitle }}</div>
       </div>
       <button class="refresh-btn">Refresh</button>
     </div>
   </div>
-  <Modal :isOpen="isModalOpened" @modal-close="closeModal" @submit="submitHandler" name="first-modal">
-    <template #header>Custom header</template>
-    <template #content>Custom content</template>
-    <template #footer>Custom content</template>
-  </Modal>
+  
 </template>
   
 <script>
-import { ref } from 'vue';
-import Modal from "./ui/Modal.vue"
-
-
 export default {
   name: 'AnimeCard',
   props: {
     anime: Object,
-  },
-  components: {
-    Modal,
-  },
-  setup() {
-    const isModalOpened = ref(false);
-
-    const openModal = () => {
-      isModalOpened.value = true;
-    };
-    const closeModal = () => {
-      isModalOpened.value = false;
-    };
-    const submitHandler = () => {
-
-    }
-    return {
-      openModal,
-      closeModal,
-      isModalOpened,
-      submitHandler,
-    };
   },
 };
 </script>

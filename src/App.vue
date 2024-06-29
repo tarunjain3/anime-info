@@ -1,5 +1,5 @@
 <template>
-  <Anime msg="Welcome to Your Vue.js App"/>
+  <Anime />
 </template>
 
 <script>
@@ -9,7 +9,7 @@ export default {
   name: 'App',
   components: {
     Anime
-}
+  }
 }
 </script>
 

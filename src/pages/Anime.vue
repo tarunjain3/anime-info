@@ -3,7 +3,7 @@
     <div v-if="anime">
       <div class="date">{{ formattedDate }}</div>
       <div class="today-wrapper">
-        <div class="today">Today</div>
+        <div  class="today">Today</div>
         <div class="avatar">VS</div>
       </div>
       <AnimeCard :anime="anime" />
@@ -17,16 +17,26 @@
 <script>
 import { ref, onMounted } from 'vue';
 import { useApiRequest } from '../utils/api'
-import AnimeCard from '../components/Animecard.vue'; // Adjust the path as needed
+import AnimeCard from '../components/Animecard.vue';
 import { formattedDate } from '../utils/date';
 
 export default {
-  name: 'AnimeList',
+  name: 'Anime',
   components: {
     AnimeCard,
   },
   setup() {
     const anime = ref(null);
+    const isModalOpened = ref(false);
+
+    const openModal = () => {
+      isModalOpened.value = true;
+      alert(isModalOpened.value)
+    };
+    const closeModal = () => {
+      isModalOpened.value = false;
+    };
+
     const { isLoading, error, sendRequest } = useApiRequest({ url: 'getContent' });
 
     onMounted(async () => {
@@ -42,7 +52,9 @@ export default {
       anime,
       isLoading,
       error,
-      formattedDate
+      formattedDate,
+      openModal,
+      closeModal
     };
   },
 };
@@ -82,4 +94,5 @@ export default {
   border-radius: 100%;
   background: lightgrey;
   font-weight: bold;
-}</style>
+}
+</style>

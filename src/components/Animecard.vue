@@ -10,7 +10,6 @@
       <button class="refresh-btn">Refresh</button>
     </div>
   </div>
-  
 </template>
   
 <script>
@@ -26,11 +25,11 @@ export default {
 .card-wrapper {
   border-radius: 2rem;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .thumbnail {
   max-height: 75vh;
+  object-fit: cover;
 }
 
 .anime-info {
@@ -48,6 +47,7 @@ export default {
 }
 
 .title {
+  text-align: start;
   font-size: 1.125rem;
   font-weight: bold;
 }

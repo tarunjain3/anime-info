@@ -6,7 +6,7 @@
         <div class="today">Today</div>
         <div class="avatar">VS</div>
       </div>
-      <AnimeCard @click="openModal" :anime="anime" />
+      <AnimeCard class="anime-card" @click="openModal" :anime="anime" />
     </div>
     <div v-else>
       Loading...
@@ -14,9 +14,12 @@
   </div>
   <Modal :isOpen="isModalOpened" @modal-close="closeModal" name="first-modal">
     <template #header>
-      
+
     </template>
-    <template #content><AnimeCard :anime="anime" /></template>
+    <template #content>
+      <AnimeCard :anime="anime" />
+      <div v-html="anime.content.text" />
+    </template>
   </Modal>
 </template>
 
@@ -91,6 +94,11 @@ export default {
 .today {
   font-size: 2rem;
   font-weight: bold;
+}
+
+.anime-card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
 }
 
 .avatar {
